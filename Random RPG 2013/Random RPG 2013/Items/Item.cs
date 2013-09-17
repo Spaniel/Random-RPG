@@ -16,9 +16,9 @@ namespace Random_RPG_2013
 
       public string Description { get; set; }
 
-      public Item(string itemname, int price)
+      public Item(string itemName, int price)
       {
-          this.ItemName = itemname;
+          this.ItemName = itemName;
           this.Price = price;
           SellPrice = (int)((double)Price * 0.5);  // halv pris 
       }
