@@ -8,5 +8,20 @@ namespace Random_RPG_2013
 {
   class Item
   {
+     
+      public string ItemName { get; set; }
+
+      public int Price { get; set; }
+      public int SellPrice; 
+
+      public string Description { get; set; }
+
+      public Item(string itemname, int price)
+      {
+          this.ItemName = itemname;
+          this.Price = price;
+          SellPrice = (int)((double)Price * 0.5);  // halv pris 
+      }
+
   }
 }

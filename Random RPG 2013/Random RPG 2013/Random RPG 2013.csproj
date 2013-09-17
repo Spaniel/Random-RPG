@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Items\AttackItem.cs" />
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\NPC.cs" />
     <Compile Include="Characters\Hero.cs" />
