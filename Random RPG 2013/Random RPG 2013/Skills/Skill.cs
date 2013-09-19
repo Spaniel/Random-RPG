@@ -16,5 +16,14 @@ namespace Random_RPG_2013
       Name = name;
       Damage = damage;
     }
+
+    public static void DoDamage(Character source, Character target, int skillIndex)
+    {
+      int damage = Utility.GenerateRandomNumber(1, source.CharacterListOfSkills[skillIndex].Damage);
+
+      target.Health = damage < target.Health ? target.Health = target.Health - damage : 0;
+
+      Utility.CombatLog(source.Name, damage, target.Name, target.Health);
+    }
   }
 }

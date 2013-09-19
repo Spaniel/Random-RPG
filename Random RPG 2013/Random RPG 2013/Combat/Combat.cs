@@ -60,14 +60,8 @@ namespace Random_RPG_2013
 
     private void DamagePhase(Character source, Character target, int skillIndex)
     {
-      //Generates a random number between 1 and damage of chosen skill.
-      int damage = Utility.GenerateRandomNumber(1, source.CharacterListOfSkills[skillIndex].Damage);
-
-      //Health of target cant be reduced below zero.
       if (source.CharacterListOfSkills[skillIndex] is Skill)
-        target.Health = damage < target.Health ? target.Health = target.Health - damage : 0;
-
-      Console.WriteLine("{0} did {1} damage to {2}. {3} has {4} health left.", source.Name, damage, target.Name, target.Name, target.Health);
+        Skill.DoDamage(source, target, skillIndex);
     }
   }
 }

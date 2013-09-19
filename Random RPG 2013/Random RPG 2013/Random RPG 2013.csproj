@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffs\Buff.cs" />
-    <Compile Include="Buffs\Debuff.cs" />
+    <Compile Include="Buffs\PositiveBuff.cs" />
+    <Compile Include="Buffs\NegativeBuff.cs" />
     <Compile Include="Items\AttackItem.cs" />
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\NPC.cs" />

@@ -48,5 +48,10 @@ namespace Random_RPG_2013
 
       return randomNum;
     }
+
+    public static void CombatLog(string sourceName, int sourceDamage, string targetName, int targetHealth)
+    {
+      Console.WriteLine("{0} did {1} damage to {2}. {3} has {4} health left.", sourceName, sourceDamage, targetName, targetName, targetHealth);
+    }
   }
 }
