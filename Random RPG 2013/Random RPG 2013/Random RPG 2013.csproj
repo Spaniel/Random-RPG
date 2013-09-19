@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffs\Buff.cs" />
+    <Compile Include="Buffs\Debuff.cs" />
     <Compile Include="Items\AttackItem.cs" />
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\NPC.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="Items\Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Skills\SkillFireballEffect.cs" />
     <Compile Include="Skills\Skill.cs" />
     <Compile Include="Utilities\Utility.cs" />
     <Compile Include="Worlds\Zone.cs" />
