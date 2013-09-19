@@ -35,6 +35,7 @@ namespace Random_RPG_2013
 
       int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count());
 
+      //Would like to get rid of this switch, and do something smarter instead.
       switch (userInput)
       {
         case 1:

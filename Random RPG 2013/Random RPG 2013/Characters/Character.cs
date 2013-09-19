@@ -12,13 +12,11 @@ namespace Random_RPG_2013
 
     public string Name { get; set; }
     public int Health { get; set; }
-    public int Damage { get; set; } //Probably temp value
 
     public Character(string name, int health, int damage)
     {
       Name = name;
       Health = health;
-      Damage = damage;
     }
   }
 }

@@ -8,7 +8,7 @@ namespace Random_RPG_2013
 {
   class Creature : Character
   {
-    public Creature(string name, int enemyHealth, int enemyDamage)
-      : base(name, enemyHealth, enemyDamage) { }
+    public Creature(string name, int creatureHealth, int creatureDamage)
+      : base(name, creatureHealth, creatureDamage) { }
   }
 }

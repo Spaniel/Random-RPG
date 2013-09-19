@@ -20,7 +20,7 @@ namespace Random_RPG_2013
       {
           this.ItemName = itemName;
           this.Price = price;
-          SellPrice = (int)((double)Price * 0.5);  // halv pris 
+          SellPrice = (int)((double)Price * 0.5);  //Half price.
       }
 
   }
