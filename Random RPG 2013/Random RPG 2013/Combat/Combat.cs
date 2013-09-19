@@ -60,8 +60,8 @@ namespace Random_RPG_2013
 
     private void DamagePhase(Character source, Character target, int skillIndex)
     {
-      if (source.CharacterListOfSkills[skillIndex] is Skill)
-        Skill.DoDamage(source, target, skillIndex);
+      if (source.CharacterListOfSkills[skillIndex] is SkillDamage)
+        SkillDamage.DoDamageSkill(source, target, skillIndex);
     }
   }
 }

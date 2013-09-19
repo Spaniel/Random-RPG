@@ -9,21 +9,14 @@ namespace Random_RPG_2013
   class Skill
   {
     public string Name { get; set; }
-    public int Damage { get; set; }
+    public string Description { get; set; }
+    //public int Cost { get; set; }
 
-    public Skill(string name, int damage)
+    public Skill(string name, string description)
     {
       Name = name;
-      Damage = damage;
-    }
-
-    public static void DoDamage(Character source, Character target, int skillIndex)
-    {
-      int damage = Utility.GenerateRandomNumber(1, source.CharacterListOfSkills[skillIndex].Damage);
-
-      target.Health = damage < target.Health ? target.Health = target.Health - damage : 0;
-
-      Utility.CombatLog(source.Name, damage, target.Name, target.Health);
+      Description = description;
+      //Cost = cost;
     }
   }
 }

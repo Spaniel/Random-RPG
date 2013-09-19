@@ -8,7 +8,7 @@ namespace Random_RPG_2013
 {
   class PositiveBuff : Buff
   {
-    public PositiveBuff(string name, string description, int effect, EnumBuffType buffType)
-      : base(name, description, effect, buffType) { }
+    public PositiveBuff(string name, string description, int effect, int duration, EnumBuffType buffType)
+      : base(name, description, effect, duration, buffType) { }
   }
 }

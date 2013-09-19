@@ -16,14 +16,14 @@ namespace Random_RPG_2013
       Creature Rat = new Creature("Rat", 50, 3);
 
       //Skills for spanieL
-      Skill attack = new Skill("Attack", 5);
-      Skill awesomeBlow = new Skill("Awesome Blow", 10);
+      SkillDamage attack = new SkillDamage("Attack", "", 1, 5);
+      SkillDamage awesomeBlow = new SkillDamage("Awesome Blow", "", 2, 10);
       P.AddSkillToCharacter(spanieL, attack);
       P.AddSkillToCharacter(spanieL, awesomeBlow);
 
       //Skills for Rat
-      Skill BasicAttack = new Skill("Basic Attack", 3);
-      Skill SuperStrike = new Skill("Super Strike", 5);
+      SkillDamage BasicAttack = new SkillDamage("Basic Attack", "", 1, 3);
+      SkillDamage SuperStrike = new SkillDamage("Super Strike", "", 2, 5);
       P.AddSkillToCharacter(Rat, BasicAttack);
       P.AddSkillToCharacter(Rat, SuperStrike);
 
@@ -34,7 +34,7 @@ namespace Random_RPG_2013
       Console.ReadLine();
     }
 
-    private void AddSkillToCharacter(Character character, Skill skill)
+    private void AddSkillToCharacter(Character character, SkillDamage skill)
     {
       character.CharacterListOfSkills.Add(skill);
     }
