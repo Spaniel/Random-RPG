@@ -10,6 +10,7 @@ namespace Random_RPG_2013
   {
     static void Main(string[] args)
     {
+        
       #region haX'd
       //// Sets op the awsome box's for the console window
       ConsoleSettings();
