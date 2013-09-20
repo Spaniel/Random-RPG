@@ -10,6 +10,7 @@ namespace Random_RPG_2013
   {
     //Could maybe be made generic, so this method could validate ints, floats, doubles etc. 
     //Not sure how to avoid try.parsing or how to try.parse a generic type.
+    //May not be useful as a generic method.
     public static int ValidateUserInput(int upperLimit)
     {
       bool inputAccepted = false;
