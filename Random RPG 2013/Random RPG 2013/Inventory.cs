@@ -7,6 +7,7 @@ using System.Collections;
 
 namespace Random_RPG_2013
 {
+
     class Inventory  : IEnumerable<Item>
     {
         private List<Item> inventory = new List<Item>(); 
@@ -26,7 +27,19 @@ namespace Random_RPG_2013
 
         }
 
-        
+        public void Remove(Item item)
+        {
+            if (inventory.Contains(item))
+            {
+                foreach (Item i in inventory)
+                {
+                    if (i.Equals(item) && i.NumberOfItems > 1)
+                        i.NumberOfItems--;
+                    else
+                        inventory.Remove(item);
+                }
+            }
+        }
 
         public IEnumerator<Item> GetEnumerator()
         {
@@ -38,6 +51,7 @@ namespace Random_RPG_2013
         {
             return GetEnumerator(); 
         }
+
 
     }
 }
