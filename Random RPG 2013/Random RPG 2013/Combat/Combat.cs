@@ -27,13 +27,29 @@ namespace Random_RPG_2013
     }
 
     private void CombatPhase()
-    {
-      Console.WriteLine("Choose action:");
+	{
+	  #region haX'd
+	  Console.SetCursorPosition(Console.WindowWidth - 30, Console.WindowHeight - 10);
+      #endregion haX'd
 
-      for (int i = 0; i < Hero.CharacterListOfSkills.Count(); i++)
-        Console.WriteLine("{0}. {1}", i + 1, Hero.CharacterListOfSkills[i].Name);
+	  Console.WriteLine("Choose action:");
 
-      int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count());
+	  for (int i = 0; i < Hero.CharacterListOfSkills.Count(); i++)
+	  {
+		  #region haX'd
+		  Console.SetCursorPosition(Console.WindowWidth - 30, Console.WindowHeight - (9 - i));
+		  #endregion haX'd
+		  Console.WriteLine("{0}. {1}", i + 1, Hero.CharacterListOfSkills[i].Name);
+	  }
+
+	  #region haX'd
+	  //// Center the cursor
+	  Console.SetCursorPosition(Console.WindowLeft + 3, Console.WindowHeight / 2 - 1);
+	  Console.WriteLine(string.Join("", Enumerable.Repeat(" ", Console.WindowWidth - 6)));
+	  Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 - 1 );
+	  #endregion
+
+	  int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count());
 
       //Would like to get rid of this switch, and do something smarter instead.
       switch (userInput)

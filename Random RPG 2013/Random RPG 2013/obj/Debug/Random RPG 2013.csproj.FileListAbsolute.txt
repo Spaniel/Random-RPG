@@ -16,3 +16,9 @@ C:\Users\Mathias\Documents\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\bin
 C:\Users\Mathias\Documents\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\bin\Debug\Random RPG 2013.pdb
 C:\Users\Mathias\Documents\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\obj\Debug\Random RPG 2013.csprojResolveAssemblyReference.cache
 C:\Users\Mathias\Documents\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\obj\Debug\Random RPG 2013.pdb
+C:\Users\Henrik\Desktop\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\bin\Debug\Random RPG 2013.exe.config
+C:\Users\Henrik\Desktop\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\obj\Debug\Random RPG 2013.exe
+C:\Users\Henrik\Desktop\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\obj\Debug\Random RPG 2013.pdb
+C:\Users\Henrik\Desktop\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\bin\Debug\Random RPG 2013.exe
+C:\Users\Henrik\Desktop\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\bin\Debug\Random RPG 2013.pdb
+C:\Users\Henrik\Desktop\GitHub\Random-RPG\Random RPG 2013\Random RPG 2013\obj\Debug\Random RPG 2013.csprojResolveAssemblyReference.cache
