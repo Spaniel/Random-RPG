@@ -21,6 +21,7 @@ namespace Random_RPG_2013
       Description = description;
       Effect = effect;
       Duration = duration;
+
       BuffType = buffType;
     }
   }
