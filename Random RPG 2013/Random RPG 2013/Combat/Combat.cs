@@ -33,7 +33,7 @@ namespace Random_RPG_2013
       #endregion haX'd
 
       Console.WriteLine("Choose action:");
-
+		
       for (int i = 0; i < Hero.CharacterListOfSkills.Count(); i++)
       {
         #region haX'd
