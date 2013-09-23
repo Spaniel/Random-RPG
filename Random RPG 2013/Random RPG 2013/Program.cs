@@ -30,10 +30,10 @@ namespace Random_RPG_2013
       //Skills for spanieL
       SkillDamage attack = new SkillDamage("Attack", "", 1, 5);
       SkillDamage awesomeBlow = new SkillDamage("Awesome Blow", "", 2, 10);
-      SkillFireballEffect fireball = new SkillFireballEffect("Fireball", "", 1, 2, 3, 5, SkillFireballEffect.EnumTarget.Target, SkillFireballEffect.EnumBuffType.Hp);
+      SkillDamageWithBuff Fireball = new SkillDamageWithBuff("Fireball", "Mediocre hit and applies a damage over time effect", 1, 3, new NegativeBuff("Burn", "Damage over time", 3, 5, SkillFireballEffect.EnumBuffType.Hp));
       P.AddSkillToCharacter(spanieL, attack);
       P.AddSkillToCharacter(spanieL, awesomeBlow);
-      P.AddSkillToCharacter(spanieL, fireball);
+      P.AddSkillToCharacter(spanieL, Fireball);
 
       //Skills for Rat
       SkillDamage BasicAttack = new SkillDamage("Basic Attack", "", 1, 2);
@@ -41,6 +41,10 @@ namespace Random_RPG_2013
       P.AddSkillToCharacter(Rat, BasicAttack);
       P.AddSkillToCharacter(Rat, SuperStrike);
 
+      //Used this to test wether or not the DecayBuffs method worked - it did.
+      PositiveBuff HoT = new PositiveBuff("Renew", "Heal over time", 5, 3, SkillFireballEffect.EnumBuffType.Hp);
+      spanieL.CharacterListOfBuffs.Add(HoT);
+      
       //Creates a combat with the hero and a creature. Limited to only two characters per fight atm.
       Combat combat1 = new Combat(spanieL, Rat);
       combat1.CombatStart();

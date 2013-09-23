@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Random_RPG_2013.Skills
+namespace Random_RPG_2013
 {
-    class SkillDamageWithBuff : SkillDamage
+  class SkillDamageWithBuff : SkillDamage
+  {
+    Buff Buff { get; set; }
+
+    double Percentage { get; set; }
+
+    public SkillDamageWithBuff(string name, string description, int min, int max, Buff buff)
+      : base(name, description, min, max)
     {
-        Buff Buff { get; set; }
-
-        double Percentage { get; set; }
-
-        public SkillDamageWithBuff(string des, string name,int min,int max,Buff buff)
-            :base(des,name, min, max)
-        {
-            this.Buff = buff; 
-        }
+      Buff = buff;
     }
+  }
 }

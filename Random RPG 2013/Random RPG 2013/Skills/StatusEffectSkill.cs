@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Random_RPG_2013.Skills
 {
-    class StatusEffectSkill : Skill 
-    {
-        Buff Buff { get; set; }
+  class StatusEffectSkill : Skill
+  {
+    Buff Buff { get; set; }
 
-        public StatusEffectSkill(string name, string des, Buff buff)
-            : base(name, des)
-        {
-            this.Buff = buff; 
-        }
+    public StatusEffectSkill(string name, string description, Buff buff)
+      : base(name, description)
+    {
+      Buff = buff;
     }
+  }
 }
