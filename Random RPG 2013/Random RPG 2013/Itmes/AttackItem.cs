@@ -12,10 +12,16 @@ namespace Random_RPG_2013
 
     public int Damage { get; set; }
 
-    public AttackItem(string itemName, int price, int damage)
+
+    public AttackItem(string ItemName, int price, int damage) : this(ItemName, price, damage, new Dictionary<string,int>()) {} 
+   
+
+    public AttackItem(string itemName, int price, int damage, Dictionary<string,int> properties)
       : base(itemName, price)
     {
       Damage = damage;
+      Properties = properties; 
+       
     }
   }
 }

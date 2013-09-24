@@ -85,6 +85,7 @@ namespace Random_RPG_2013
     //Decrements or removes buffs from characters based on duration.
     public void DecayBuffs()
     {
+        
       for (int i = Hero.CharacterListOfBuffs.Count() - 1; i >= 0; i--)
         if (Hero.CharacterListOfBuffs[i].Duration > 1)
           Hero.CharacterListOfBuffs[i].Duration--;
@@ -117,5 +118,7 @@ namespace Random_RPG_2013
 
       //Count turn up
     }
+
+    
   }
 }

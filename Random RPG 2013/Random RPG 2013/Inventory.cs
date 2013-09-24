@@ -14,7 +14,7 @@ namespace Random_RPG_2013
 
         public void Add(Item item)
         {
-            if (inventory.Contains(item))
+            if (inventory.Contains(item) && item is Consumable)
             {
                 foreach (Item i in inventory)
                 {

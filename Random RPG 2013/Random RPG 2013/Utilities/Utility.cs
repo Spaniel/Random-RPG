@@ -45,20 +45,8 @@ namespace Random_RPG_2013
 		  }
 		  else
 		  {
-			  #region haX'd
-			  //// Print out error text and make sure to clean/overwrite the space on the console on which the text is presented
-			  string errorText = "Input not accepted.";
-			  Console.SetCursorPosition(Console.WindowLeft + 3, Console.WindowHeight / 2);
-			  Console.WriteLine(string.Join("", Enumerable.Repeat(" ", Console.WindowWidth - 6)));
-			  Console.SetCursorPosition(((Console.WindowWidth - errorText.Length) / 2), Console.WindowHeight / 2);
-			  Console.WriteLine(errorText);
 
-			  //// Center the cursor
-			  Console.SetCursorPosition(Console.WindowLeft + 3, Console.WindowHeight / 2 - 1);
-			  Console.WriteLine(string.Join("", Enumerable.Repeat(" ", Console.WindowWidth - 6)));
-			  Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 - 1);
-			  #endregion haX'd
-			  inputAccepted = false;
+              inputAccepted = false;
 		  }
 	  }
 

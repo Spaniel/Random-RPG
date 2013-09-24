@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Random_RPG_2013
 {
-  class Item : System.Object
+  abstract class Item : System.Object
   {
     public string ItemName { get; set; }
 
@@ -17,12 +17,18 @@ namespace Random_RPG_2013
 
     public int NumberOfItems = 1;
 
+    internal Dictionary<string, int> Properties; 
+  
+
     public Item(string itemName, int price)
     {
       this.ItemName = itemName;
       this.Price = price;
       SellPrice = (int)((double)Price * 0.5);  //Half price.
+         
     }
+
+
 
     public override bool Equals(object obj)
     {
