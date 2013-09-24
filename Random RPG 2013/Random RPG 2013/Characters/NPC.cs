@@ -10,5 +10,7 @@ namespace Random_RPG_2013
   {
    /* public NPC(string name)
       : base(name) { }*/
+
+      string Message { get; set; }
   }
 }

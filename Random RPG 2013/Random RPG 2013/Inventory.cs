@@ -12,6 +12,8 @@ namespace Random_RPG_2013
     {
         private List<Item> inventory = new List<Item>(); 
 
+        int money = 0; 
+
         public void Add(Item item)
         {
             if (inventory.Contains(item) && item is Consumable)
@@ -27,7 +29,7 @@ namespace Random_RPG_2013
 
         }
 
-        public void Remove(Item item)
+        public void Remove(Item item, bool sold)
         {
             if (inventory.Contains(item))
             {
@@ -39,6 +41,8 @@ namespace Random_RPG_2013
                         inventory.Remove(item);
                 }
             }
+            if (sold)
+                money += item.SellPrice; 
         }
 
         public IEnumerator<Item> GetEnumerator()
