@@ -26,9 +26,9 @@ namespace Random_RPG_2013
       #endregion
 
       //Skills for spanieL
-      SkillDamage attack = new SkillDamage("Attack", "", 1, 5);
-      SkillDamage awesomeBlow = new SkillDamage("Awesome Blow", "", 2, 10);
-      SkillDamageWithBuff Fireball = new SkillDamageWithBuff("Fireball", "Mediocre hit and applies a damage over time effect", 1, 3, new NegativeBuff("Burn", "Damage over time", 3, 5, Buff.EnumTargetOfBuff.Target, Buff.EnumTypeOfBuff.Hp));
+      SkillDamage attack = new SkillDamage("Attack", "", 1, 1);
+      SkillDamage awesomeBlow = new SkillDamage("Awesome Blow", "", 2, 2);
+      SkillDamageWithBuff Fireball = new SkillDamageWithBuff("Fireball", "Mediocre hit and applies a damage over time effect", 1, 4, new NegativeBuff("Burn", "Damage over time", 3, 5, Buff.EnumTargetOfBuff.Target, Buff.EnumTypeOfBuff.Hp));
       P.AddSkillToCharacter(spanieL, attack);
       P.AddSkillToCharacter(spanieL, awesomeBlow);
       P.AddSkillToCharacter(spanieL, Fireball);
