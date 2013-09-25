@@ -6,29 +6,21 @@ using System.Threading.Tasks;
 
 namespace Random_RPG_2013
 {
-	/// This is still work in progres and cause of that it still needs to be implemted 
 	class Navigation
 	{
-		static string[] skills;
 		static int index = 0;
 
-		public static void Navigator(string[] args)
+		public static void Navigator()
 		{
-			Console.CursorVisible = false;
-
-			SkillList();
 			DrawSkillList();
 
-			while (true)
+			while (Combat.Hero.Health > 0 && Combat.Creature.Health > 0)
 			{
 				GetKeyboardState();
 				DrawSkillList();
 			}
-		}
 
-		static void SkillList()
-		{
-			skills = new string[] {"1. Skill", "2. Skill", "3. Skill" };
+			Interface.GameOver();
 		}
 
 		static void GetKeyboardState()
@@ -36,7 +28,7 @@ namespace Random_RPG_2013
 			ConsoleKeyInfo info = Console.ReadKey(true);
 			if (info.Key == ConsoleKey.DownArrow || info.Key == ConsoleKey.RightArrow)
 			{
-				if (index < skills.Length - 1)
+				if (index < Combat.Hero.CharacterListOfSkills.Count() - 1)
 				{
 					index++;
 				}
@@ -52,57 +44,47 @@ namespace Random_RPG_2013
 
 			if (info.Key == ConsoleKey.Enter)
 			{
-				/// We add one to index because of the skill-switch begin with case 1
 				Skills(index + 1);
 			}
 		}
 
 		public static void DrawSkillList()
 		{
-			Console.SetCursorPosition(Console.WindowWidth - 30, Console.WindowHeight - 10);
-			
+			Console.SetCursorPosition(Console.WindowWidth / 3 * 2, Console.WindowHeight - 10);
+
 			Console.WriteLine("Choose action:");
 
-			for (int i = 0; i < skills.Length; i++)
+			for (int i = 0; i < Combat.Hero.CharacterListOfSkills.Count(); i++)
 			{
-				Console.SetCursorPosition(Console.WindowWidth - 30, Console.WindowHeight - (9 - i));
+				Console.SetCursorPosition(Console.WindowWidth / 3 * 2, Console.WindowHeight - (9 - i));
 				if (i == index)
 				{
 					Console.BackgroundColor = ConsoleColor.Blue;
-					Console.WriteLine(skills[i]);
+					Console.WriteLine("{0}. {1}", i + 1, Combat.Hero.CharacterListOfSkills[i].Name);
 					Console.ResetColor();
 				}
 				else
 				{
-					Console.WriteLine(skills[i]);
+					Console.WriteLine("{0}. {1}", i + 1, Combat.Hero.CharacterListOfSkills[i].Name);
 				}
 			}
 			Console.ResetColor();
+
+			Console.SetCursorPosition(Console.WindowLeft + 3, Console.WindowHeight / 2 - 1);
+			Console.WriteLine(string.Join("", Enumerable.Repeat(" ", Console.WindowWidth - 6)));
+			Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 - 1);
 		}
 
-		static void Skills(int index)
+		public static void Skills(int Index)
 		{
-			switch (index)
-			{
-				case 1:
-					Console.SetCursorPosition(Console.WindowHeight / 2, Console.WindowHeight / 2);
-					Console.WriteLine("1. Skill used");
-					break;
+			Interface.SelectedSkill_Hero(Index);
+			Interface.SelectedSkill_Creature(1);
 
-				case 2:
-					Console.SetCursorPosition(Console.WindowHeight / 2, Console.WindowHeight / 2);
-					Console.WriteLine("2. Skill used");
-					break;
+			Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
 
-				case 3:
-					Console.SetCursorPosition(Console.WindowHeight / 2, Console.WindowHeight / 2);
-					Console.WriteLine("3. Skill used");
-					break;
-
-				default:
-
-					break;
-			}
+			/// WTF! Dont know whats going on here.. but if you comment either one of the to damagepahases out.. well try run it...
+			Combat.DamagePhase(Combat.Hero, Combat.Creature, Index - 1);
+			Combat.DamagePhase(Combat.Creature, Combat.Hero, 1);
 		}
 	}
 }

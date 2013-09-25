@@ -11,10 +11,8 @@ namespace Random_RPG_2013
     static void Main(string[] args)
     {
         
-      #region haX'd
       /// Sets op the awsome box's for the console window
-      Interface.ConsoleSettings();
-      #endregion
+		Interface.ConsoleSettings(60, 30);
 
       Program P = new Program();
 
@@ -23,8 +21,8 @@ namespace Random_RPG_2013
 
       #region haX'd
       /// Hardcodet atm, shouldn't be, also need to specify hero and creature through classes and not string if possible
-      Health.HealthBarController("Hero", spanieL.Health, spanieL.Health);
-      Health.HealthBarController("Creature", Rat.Health, Rat.Health);
+      Interface.HealthBarController("Hero", spanieL.Health, spanieL.Health);
+	  Interface.HealthBarController("Creature", Rat.Health, Rat.Health);
       #endregion
 
       //Skills for spanieL

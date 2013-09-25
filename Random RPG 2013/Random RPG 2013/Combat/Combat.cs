@@ -8,8 +8,8 @@ namespace Random_RPG_2013
 {
   class Combat
   {
-    public Hero Hero { get; set; }
-    public Creature Creature { get; set; }
+    public static Hero Hero { get; set; }
+    public static Creature Creature { get; set; }
 
     public Combat(Hero hero, Creature creature)
     {
@@ -32,61 +32,21 @@ namespace Random_RPG_2013
 
     private void CombatPhase(int turn)
     {
-      #region haX'd
-      Console.SetCursorPosition(Console.WindowWidth - 30, Console.WindowHeight - 10);
-      #endregion haX'd
+		Navigation.Navigator();
 
-      Console.WriteLine("Choose action:");
-		
-      for (int i = 0; i < Hero.CharacterListOfSkills.Count(); i++)
-      {
-        #region haX'd
-        Console.SetCursorPosition(Console.WindowWidth - 30, Console.WindowHeight - (9 - i));
-        #endregion haX'd
-        Console.WriteLine("{0}. {1}", i + 1, Hero.CharacterListOfSkills[i].Name);
-      }
+		/// I have removed the "switch (userInput)" and instead using the metode "(Skills)" from Navigation
+		//int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count()); 
 
-      #region haX'd
-      //// Center the cursor
-      Console.SetCursorPosition(Console.WindowLeft + 3, Console.WindowHeight / 2 - 1);
-      Console.WriteLine(string.Join("", Enumerable.Repeat(" ", Console.WindowWidth - 6)));
-      Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 - 1);
-      #endregion
-
-      int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count());
-
-      //Would like to get rid of this switch, and do something smarter instead.
-      switch (userInput)
-      {
-        case 1:
-          DamagePhase(Hero, Creature, userInput - 1);
-          break;
-        case 2:
-          DamagePhase(Hero, Creature, userInput - 1);
-          break;
-        case 3:
-          DamagePhase(Hero, Creature, userInput - 1);
-          break;
-        case 4:
-          DamagePhase(Hero, Creature, userInput - 1);
-          break;
-        case 5:
-          DamagePhase(Hero, Creature, userInput - 1);
-          break;
-      }
-
-      DamagePhase(Creature, Hero, 1);
-
-      EndTurn();
+		EndTurn();
     }
 
-    private void DamagePhase(Character source, Character target, int skillIndex)
+    public static void DamagePhase(Character source, Character target, int skillIndex)
     {
       if (source.CharacterListOfSkills[skillIndex] is SkillDamage)
         DoDamageSkill(source, target, skillIndex);
     }
 
-    private void DoDamageSkill(Character source, Character target, int skillIndex)
+    private static void DoDamageSkill(Character source, Character target, int skillIndex)
     {
       int damage = Utility.GenerateRandomNumber(source.CharacterListOfSkills[skillIndex].MinDamage,
         source.CharacterListOfSkills[skillIndex].MaxDamage);

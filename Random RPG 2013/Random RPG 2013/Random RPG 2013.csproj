@@ -44,7 +44,6 @@
     <Compile Include="Buffs\Buff.cs" />
     <Compile Include="Buffs\PositiveBuff.cs" />
     <Compile Include="Buffs\NegativeBuff.cs" />
-    <Compile Include="Hax\Health.cs" />
     <Compile Include="Hax\Interface.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Itmes\Accessory.cs" />
