@@ -18,15 +18,5 @@ namespace Random_RPG_2013
       MinDamage = minDamage;
       MaxDamage = maxDamage;
     }
-
-    public static void DoDamageSkill(Character source, Character target, int skillIndex)
-    {
-      int damage = Utility.GenerateRandomNumber(source.CharacterListOfSkills[skillIndex].MinDamage, 
-        source.CharacterListOfSkills[skillIndex].MaxDamage);
-
-      target.Health = damage < target.Health ? target.Health = target.Health - damage : 0;
-
-      Utility.CombatLog(source.Name, damage, target.Name, target.Health);
-    }
   }
 }

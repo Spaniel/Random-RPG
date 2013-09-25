@@ -17,11 +17,5 @@ namespace Random_RPG_2013
     {
       Buff = buff;
     }
-
-    public static void DoDamageWithEffect(Character source, Character target, int skillIndex)
-    {
-      if (source.CharacterListOfBuffs.Count() > 1 || target.CharacterListOfBuffs.Count() > 1)
-        Buff.HandleBuffs(source, target, skillIndex);
-    }
   }
 }

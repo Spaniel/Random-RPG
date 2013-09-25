@@ -16,8 +16,8 @@ namespace Random_RPG_2013
     public string Description { get; set; }
     public int Effect { get; set; }
     public int Duration { get; set; }
-    EnumTargetOfBuff TargetOfBuff { get; set; }
-    EnumTypeOfBuff TypeOfBuff { get; set; }
+    public EnumTargetOfBuff TargetOfBuff { get; set; }
+    public EnumTypeOfBuff TypeOfBuff { get; set; }
 
     public Buff(string name, string description, int effect, int duration, EnumTargetOfBuff targetOfBuff, EnumTypeOfBuff typeOfBuff)
     {
@@ -27,23 +27,6 @@ namespace Random_RPG_2013
       Duration = duration;
       TargetOfBuff = targetOfBuff;
       TypeOfBuff = typeOfBuff;
-    }
-
-    public static void HandleBuffs(Character source, Character target, int skillIndex)
-    {
-      foreach (Buff b in source.CharacterListOfBuffs)
-      {
-        if (b.TargetOfBuff == Buff.EnumTargetOfBuff.Self)
-        {
-          if (b.TypeOfBuff == Buff.EnumTypeOfBuff.Hp)
-            source.Health += b.Effect;
-        }
-      }
-
-      foreach (Buff b in target.CharacterListOfBuffs)
-      {
-
-      }
     }
   }
 }
