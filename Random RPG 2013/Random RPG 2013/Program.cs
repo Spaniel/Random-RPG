@@ -40,7 +40,7 @@ namespace Random_RPG_2013
       P.AddSkillToCharacter(Rat, SuperStrike);
 
       //Used this to test wether or not the DecayBuffs method worked - it did.
-      PositiveBuff HoT = new PositiveBuff("Renew", "Heal over time", 5, 3, Buff.EnumTargetOfBuff.Self, Buff.EnumTypeOfBuff.Hp);
+      PositiveBuff HoT = new PositiveBuff("Renew", "Heal over time", 5, 3, Buff.EnumTargetOfBuff.Source, Buff.EnumTypeOfBuff.Hp);
       spanieL.CharacterListOfBuffs.Add(HoT);
       
       //Creates a combat with the hero and a creature. Limited to only two characters per fight atm.

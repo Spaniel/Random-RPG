@@ -17,6 +17,8 @@ namespace Random_RPG_2013
       Creature = creature;
     }
 
+    public Combat() { }
+
     public Character CombatStart()
     {
       int turnCounter = 1;
@@ -40,13 +42,16 @@ namespace Random_RPG_2013
 		EndTurn();
     }
 
-    public static void DamagePhase(Character source, Character target, int skillIndex)
+    public void DamagePhase(Character source, Character target, int skillIndex)
     {
+      if (source.CharacterListOfBuffs.Count() > 1 || target.CharacterListOfBuffs.Count() > 1)
+        HandleBuffs(source, target, skillIndex);
+
       if (source.CharacterListOfSkills[skillIndex] is SkillDamage)
         DoDamageSkill(source, target, skillIndex);
     }
 
-    private static void DoDamageSkill(Character source, Character target, int skillIndex)
+    private void DoDamageSkill(Character source, Character target, int skillIndex)
     {
       int damage = Utility.GenerateRandomNumber(source.CharacterListOfSkills[skillIndex].MinDamage,
         source.CharacterListOfSkills[skillIndex].MaxDamage);
@@ -58,25 +63,80 @@ namespace Random_RPG_2013
 
     private void DoDamageWithEffect(Character source, Character target)
     {
-      if (source.CharacterListOfBuffs.Count() > 1 || target.CharacterListOfBuffs.Count() > 1)
-        HandleBuffs(source, target);
+      
     }
 
-    private void HandleBuffs(Character source, Character target)
+    private void HandleBuffs(Character source, Character target, int skillIndex)
     {
-      foreach (Buff b in source.CharacterListOfBuffs)
+      string statusEffect = "";
+
+      for (int i = 0; i < source.CharacterListOfBuffs.Count(); i++)
       {
-        if (b.TargetOfBuff == Buff.EnumTargetOfBuff.Self)
+        List<Buff> b = source.CharacterListOfBuffs;
+
+        if (source.CharacterListOfBuffs[i] is PositiveBuff)
         {
-          if (b.TypeOfBuff == Buff.EnumTypeOfBuff.Hp)
-            source.Health += b.Effect;
+          if (b[i].TargetOfBuff == Buff.EnumTargetOfBuff.Source)
+          {
+            if (b[i].TypeOfBuff == Buff.EnumTypeOfBuff.Hp)
+            {
+              source.Health += ((PositiveBuff)b[i]).Effect;
+            }
+          }
+        }
+        else if (source.CharacterListOfBuffs[i] is NegativeBuff)
+        {
+          if (b[i].TargetOfBuff == Buff.EnumTargetOfBuff.Source)
+          {
+            if (b[i].TypeOfBuff == Buff.EnumTypeOfBuff.Hp)
+            {
+              source.Health -= ((NegativeBuff)b[i]).Effect;
+            }
+          }
+        }
+        else
+        {
+          if (b[i].TargetOfBuff == Buff.EnumTargetOfBuff.Source)
+          {
+            if (b[i].TypeOfBuff == Buff.EnumTypeOfBuff.Status)
+            {
+              statusEffect = FindStatusEffect(source);
+
+              if (statusEffect == "stun")
+              {
+                //Do nothing
+              }
+              else if (statusEffect == "slow")
+              {
+                //Do something
+              }
+              else
+              {
+                //Do something
+              }
+            }
+          }
         }
       }
+    }
 
-      foreach (Buff b in target.CharacterListOfBuffs)
+    private string FindStatusEffect(Character character)
+    {
+      string statusEffect = "";
+
+      foreach (Buff b in character.CharacterListOfBuffs)
       {
-
+        if (b is StatusEffect)
+        {
+          if (((StatusEffect)b).Status == StatusEffect.EnumStatus.Stun)
+            statusEffect = "stun";
+          else if (((StatusEffect)b).Status == StatusEffect.EnumStatus.Slow)
+            statusEffect = "slow";
+          else
+            statusEffect = "confuse";
+        }
       }
+      return statusEffect;
     }
 
     //Decrements or removes buffs from characters based on duration.
