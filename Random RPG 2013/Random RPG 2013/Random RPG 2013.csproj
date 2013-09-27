@@ -65,6 +65,7 @@
     <Compile Include="Skills\SkillDamage.cs" />
     <Compile Include="Skills\StatusEffectSkill.cs" />
     <Compile Include="Buffs\StatusEffect.cs" />
+    <Compile Include="Characters\Stat.cs" />
     <Compile Include="Utilities\Utility.cs" />
     <Compile Include="Worlds\Zone.cs" />
   </ItemGroup>

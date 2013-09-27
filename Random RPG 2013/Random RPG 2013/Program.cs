@@ -10,19 +10,19 @@ namespace Random_RPG_2013
   {
     static void Main(string[] args)
     {
-        
+
       /// Sets op the awsome box's for the console window
-		Interface.ConsoleSettings(60, 30);
+      Interface.ConsoleSettings(60, 30);
 
       Program P = new Program();
 
-      Hero spanieL = new Hero("spanieL", 100, 6);
+      Hero spanieL = new Hero("spanieL", 100, 6, 5, 5, 5, 5);
       Creature Rat = new Creature("Rat", 50, 10);
 
       #region haX'd
       /// Hardcodet atm, shouldn't be, also need to specify hero and creature through classes and not string if possible
       Interface.HealthBarController("Hero", spanieL.Health, spanieL.Health);
-	  Interface.HealthBarController("Creature", Rat.Health, Rat.Health);
+      Interface.HealthBarController("Creature", Rat.Health, Rat.Health);
       #endregion
 
       //Skills for spanieL
@@ -42,7 +42,7 @@ namespace Random_RPG_2013
       //Used this to test wether or not the DecayBuffs method worked - it did.
       PositiveBuff HoT = new PositiveBuff("Renew", "Heal over time", 5, 3, Buff.EnumTargetOfBuff.Source, Buff.EnumTypeOfBuff.Hp);
       spanieL.CharacterListOfBuffs.Add(HoT);
-      
+
       //Creates a combat with the hero and a creature. Limited to only two characters per fight atm.
       Combat combat1 = new Combat(spanieL, Rat);
       combat1.CombatStart();

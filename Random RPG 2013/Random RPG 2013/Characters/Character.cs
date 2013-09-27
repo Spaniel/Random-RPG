@@ -12,6 +12,7 @@ namespace Random_RPG_2013
     public List<Buff> CharacterListOfBuffs = new List<Buff>();
 
     Inventory inventory; 
+
     public Dictionary<string, int> Stats; 
     public string Name { get; set; }
     public int Health { get; set; }
