@@ -9,6 +9,12 @@ namespace Random_RPG_2013
     class SkillWithBuff : Skill 
     {
         public MyBuff SkillBuff { get; set; }
+
+        public SkillWithBuff(string name, string des, MyBuff buff) :
+            base(name, des)
+        {
+            SkillBuff = buff; 
+        }
         
     }
 }

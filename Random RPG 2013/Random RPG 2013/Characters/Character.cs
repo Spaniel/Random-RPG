@@ -8,7 +8,7 @@ namespace Random_RPG_2013
 {
   abstract class Character
   {
-    public List<SkillDamage> CharacterListOfSkills = new List<SkillDamage>();
+    public List<Skill> CharacterListOfSkills = new List<Skill>();
     public List<MyBuff> CharacterListOfBuffs = new List<MyBuff>();
 
     Inventory inventory;

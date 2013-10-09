@@ -15,6 +15,7 @@ namespace Random_RPG_2013
 
         public int duration()
         {
+
             return CurrentDuration--; 
         }
 
@@ -23,24 +24,33 @@ namespace Random_RPG_2013
             CurrentDuration = _startDuration;
         }
 
-        public virtual void effect(Character target){} 
+        public virtual void effect(Character target){}
+
+        public MyBuff(string name, int dur)
+        {
+            Name = name;
+            _startDuration = dur;
+            CurrentDuration = dur; 
+            
+        }
     }
 
     class DOT : MyBuff
     {
-        int Damage { get; set; }
+        public int Damage { get; set; }
 
-        public DOT(int damage)
+        public DOT(string name, int dur, int damage):
+            base(name,dur)
         {
             this.Damage = damage; 
         }
 
         public override void effect(Character target)
         {
-            target.Health =- Damage; 
+            target.Health = target.Health- Damage; 
         }
     }
-
+/*
     class Healing : MyBuff
     {
         int Heal { get; set; }
@@ -56,11 +66,12 @@ namespace Random_RPG_2013
         }
     }
 
-    class StatusEffect : MyBuff
+    class StatusEffectBuff : MyBuff
     {
         public override void effect(Character target)
         {
             target.IsStunned = true; 
         }
     }
+ * */
 }

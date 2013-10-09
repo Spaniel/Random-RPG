@@ -85,8 +85,8 @@ namespace Random_RPG_2013
 			/// WTF! Dont know whats going on here.. but if you comment either one of the to damagepahases out.. well try run it...
       Combat c = new Combat();
       
-      c.DamagePhase(Combat.Hero, Combat.Creature, Index - 1);
-			c.DamagePhase(Combat.Creature, Combat.Hero, 1);
+      c.DMGPhase(Combat.Hero, Combat.Creature, Index - 1);
+			c.DMGPhase(Combat.Creature, Combat.Hero, 1);
 		}
 	}
 }

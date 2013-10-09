@@ -38,13 +38,14 @@ namespace Random_RPG_2013
     private void CombatPhase(int turn)
     {
 		Navigation.Navigator();
-
+        
 		/// I have removed the "switch (userInput)" and instead using the metode "(Skills)" from Navigation
 		//int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count()); 
 
-		EndTurn();
+        
+	
     }
-
+/*
     public void DamagePhase(Character source, Character target, int skillIndex)
     {
       if (source.CharacterListOfBuffs.Count() > 1 || target.CharacterListOfBuffs.Count() > 1)
@@ -53,11 +54,16 @@ namespace Random_RPG_2013
       if (source.CharacterListOfSkills[skillIndex] is SkillDamage)
         DoDamageSkill(source, target, skillIndex);
     }
+ * */
 
     private void DoDamageSkill(Character source, Character target, int skillIndex)
     {
-      int damage = Utility.GenerateRandomNumber(source.CharacterListOfSkills[skillIndex].MinDamage,
-        source.CharacterListOfSkills[skillIndex].MaxDamage);
+
+        SkillDamage x = (SkillDamage)source.CharacterListOfSkills[skillIndex];
+
+        int damage = Utility.GenerateRandomNumber(x.MinDamage, x.MaxDamage); 
+
+        
 
       target.Health = damage < target.Health ? target.Health = target.Health - damage : 0;
 
@@ -69,7 +75,7 @@ namespace Random_RPG_2013
       
     }
 
-    private void HandleBuffs(Character source, Character target, int skillIndex)
+      /*private void HandleBuffs(Character source, Character target, int skillIndex)
     {
       string statusEffect = "";
 
@@ -157,6 +163,7 @@ namespace Random_RPG_2013
         else
           Creature.CharacterListOfBuffs.Remove(Creature.CharacterListOfBuffs[i]);
     }
+       * */
     #region Mads
 
     private void BuffHandler()
@@ -167,18 +174,23 @@ namespace Random_RPG_2013
 
     private void EffectAndDuration(List<MyBuff> BuffList, Character target)
     {
+        int k = target.Health; 
         for (int i = 0; i < BuffList.Count; i++)
         {
             BuffList[i].effect(target);
             if (BuffList[i].duration() == 1)
-                BuffList.Remove(BuffList[i]); 
+                BuffList.Remove(BuffList[i]);
+            
         }
+        
     }
 
     private void Spellcast(Skill spell, Character source, Character enemy)
     {
         if (spell is SkillWithBuff)
-            SpellEffectWithBuff((SkillWithBuff)spell, source, enemy); 
+            SpellEffectWithBuff((SkillWithBuff)spell, source, enemy);
+        else
+            Spellwithoutbuff(spell, source, enemy); 
 
     }
 
@@ -196,7 +208,7 @@ namespace Random_RPG_2013
         }
     }
 
-    private void Spellwithoutbuff(SkillWithBuff spell, Character source, Character enemy)
+    private void Spellwithoutbuff(Skill spell, Character source, Character enemy)
     {
         if (spell.Selfcast)
             spell.effect(source);
@@ -204,23 +216,29 @@ namespace Random_RPG_2013
             spell.effect(enemy); 
     }
 
-    private void DMGPhase(Character source, Character target)
+    public void DMGPhase(Character source, Character target, int skillIndex)
     {
         if(source.IsStunned)
             //nothing 
 
-        if (source.CharacterListOfBuffs.Count() > 1 || target.CharacterListOfBuffs.Count() > 1)
-            BuffHandler(); 
+        if (source.CharacterListOfBuffs.Count() > 0 || target.CharacterListOfBuffs.Count() > 0)
+            BuffHandler();
+
+        if (source.CharacterListOfSkills[skillIndex] is SkillDamage)
+            DoDamageSkill(source, target, skillIndex);
+        else 
+            Spellcast(source.CharacterListOfSkills[skillIndex], source,target); 
 
         // der skal så være noget her med abillities 
 
     }
     #endregion
-
+      /*
     private void EndTurn()
     {
       if (Hero.CharacterListOfBuffs.Count() > 0 || Hero.CharacterListOfBuffs.Count() > 0)
         DecayBuffs();
     }
+       * */
   }
 }
