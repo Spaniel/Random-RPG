@@ -62,9 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Skills\Skill.cs" />
     <Compile Include="Skills\SkillDamageWithBuff.cs" />
-    <Compile Include="Skills\SkillFireballEffect.cs" />
     <Compile Include="Skills\SkillDamage.cs" />
-    <Compile Include="Skills\StatusEffectSkill.cs" />
     <Compile Include="Buffs\StatusEffect.cs" />
     <Compile Include="Characters\Stat.cs" />
     <Compile Include="Utilities\Utility.cs" />

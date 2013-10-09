@@ -11,6 +11,10 @@ namespace Random_RPG_2013
     public string Name { get; set; }
     public string Description { get; set; }
     //public int Cost { get; set; }
+    public bool Selfcast { get; set; }
+    public bool HasBuff; 
+
+    public virtual void effect(Character target) { }
 
     public Skill(string name, string description)
     {

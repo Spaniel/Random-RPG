@@ -11,6 +11,9 @@ namespace Random_RPG_2013
     public static Hero Hero { get; set; }
     public static Creature Creature { get; set; }
 
+    private List<MyBuff> HeroBuffs;
+    private List<MyBuff> CreatureBuffs; 
+
     public Combat(Hero hero, Creature creature)
     {
       Hero = hero;
@@ -154,6 +157,65 @@ namespace Random_RPG_2013
         else
           Creature.CharacterListOfBuffs.Remove(Creature.CharacterListOfBuffs[i]);
     }
+    #region Mads
+
+    private void BuffHandler()
+    {
+        EffectAndDuration(Hero.CharacterListOfBuffs, Hero);
+        EffectAndDuration(Creature.CharacterListOfBuffs, Creature); 
+    }
+
+    private void EffectAndDuration(List<MyBuff> BuffList, Character target)
+    {
+        for (int i = 0; i < BuffList.Count; i++)
+        {
+            BuffList[i].effect(target);
+            if (BuffList[i].duration() == 1)
+                BuffList.Remove(BuffList[i]); 
+        }
+    }
+
+    private void Spellcast(Skill spell, Character source, Character enemy)
+    {
+        if (spell is SkillWithBuff)
+            SpellEffectWithBuff((SkillWithBuff)spell, source, enemy); 
+
+    }
+
+    private void SpellEffectWithBuff(SkillWithBuff spell, Character source, Character enemy)
+    {
+        if (spell.Selfcast)
+        {
+            spell.effect(source);
+            source.CharacterListOfBuffs.Add(spell.SkillBuff); 
+        }
+        else
+        {
+            spell.effect(enemy);
+            enemy.CharacterListOfBuffs.Add(spell.SkillBuff); 
+        }
+    }
+
+    private void Spellwithoutbuff(SkillWithBuff spell, Character source, Character enemy)
+    {
+        if (spell.Selfcast)
+            spell.effect(source);
+        else
+            spell.effect(enemy); 
+    }
+
+    private void DMGPhase(Character source, Character target)
+    {
+        if(source.IsStunned)
+            //nothing 
+
+        if (source.CharacterListOfBuffs.Count() > 1 || target.CharacterListOfBuffs.Count() > 1)
+            BuffHandler(); 
+
+        // der skal så være noget her med abillities 
+
+    }
+    #endregion
 
     private void EndTurn()
     {
