@@ -12,20 +12,20 @@ namespace Random_RPG_2013
     {
 
       /// Sets op the awsome box's for the console window
-      Interface.ConsoleSettings(60, 30);
+      //Interface.ConsoleSettings(60, 30);
 
       Program P = new Program();
 
       Hero spanieL = new Hero("spanieL", 100, 6, 5, 5, 5, 5);
       Creature Rat = new Creature("Rat", 50, 10);
         
-
+        /*
       #region haX'd
       /// Hardcodet atm, shouldn't be, also need to specify hero and creature through classes and not string if possible
       Interface.HealthBarController("Hero", spanieL.Health, spanieL.Health);
       Interface.HealthBarController("Creature", Rat.Health, Rat.Health);
       #endregion
-
+        */
 
       //Skills for spanieL
       SkillDamage attack = new SkillDamage("Attack", "", 1, 1);

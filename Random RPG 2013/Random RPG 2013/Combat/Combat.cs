@@ -25,7 +25,8 @@ namespace Random_RPG_2013
     public Character CombatStart()
     {
       int turnCounter = 1;
-
+      DMGPhase(Hero, Creature, 2); // SÆTTER BUFF PÅ CREATURE LOL 
+      
       //Keeps combat going while both hero and creature is above 0 health.
       while (Hero.Health > 0 && Creature.Health > 0)
       {
@@ -37,11 +38,13 @@ namespace Random_RPG_2013
 
     private void CombatPhase(int turn)
     {
-		Navigation.Navigator();
+		//Navigation.Navigator();
         
 		/// I have removed the "switch (userInput)" and instead using the metode "(Skills)" from Navigation
 		//int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count()); 
-
+        BuffHandler(); // HANDLER BUFF....ALT KOMMER TIL I SKE I DMGPHASE MEN BLIVER NØD TIL AT GØRE DET PÅ DENNE MÅDE FOR AT VISE AT BUFF VIKER
+        Console.WriteLine(Creature.Health);
+        Console.ReadLine(); 
         
 	
     }
@@ -225,12 +228,13 @@ namespace Random_RPG_2013
             BuffHandler();
 
         if (source.CharacterListOfSkills[skillIndex] is SkillDamage)
-            DoDamageSkill(source, target, skillIndex);
+              DoDamageSkill(source, target, skillIndex);
+       
         else 
             Spellcast(source.CharacterListOfSkills[skillIndex], source,target); 
 
         // der skal så være noget her med abillities 
-
+        
     }
     #endregion
       /*
