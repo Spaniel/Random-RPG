@@ -63,8 +63,8 @@
     <Compile Include="Skills\Skill.cs" />
     <Compile Include="Skills\SkillDamage.cs" />
     <Compile Include="Buffs\StatusEffect.cs" />
-    <Compile Include="Characters\Stat.cs" />
     <Compile Include="SkillWithBuff.cs" />
+    <Compile Include="Stat.cs" />
     <Compile Include="Utilities\Utility.cs" />
     <Compile Include="Worlds\Zone.cs" />
   </ItemGroup>

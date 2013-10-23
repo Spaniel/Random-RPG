@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Random_RPG_2013
 {
-    class MyBuff
+    abstract class MyBuff
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,8 +14,7 @@ namespace Random_RPG_2013
         private int CurrentDuration { get; set; }
 
         public int duration()
-        {
-
+        { 
             return CurrentDuration--; 
         }
 
@@ -34,53 +33,45 @@ namespace Random_RPG_2013
         }
     }
 
-    class DOT : MyBuff
+    class Statbuff : MyBuff
     {
-        public int Damage { get; set; }
+       internal int Statbuffer { get; set; }
+       internal Stat Statter; 
 
-        public DOT(string name, int dur, int damage):
-            base(name,dur)
+        public Statbuff(string name, int dur, int statbuffer, Stat statter)
+            : base(name, dur)
         {
-            this.Damage = damage; 
-        }
-
-        public override void effect(Character target)
-        {
-            target.Health = target.Health - Damage; 
+            Statbuffer = statbuffer;
+            Statter = statter; 
         }
     }
 
-    class HEAL : MyBuff
+    class NegativeBuff : Statbuff
     {
-      public int Heal { get; set; }
+        public NegativeBuff(string name, int dur, int damage, int statbuffer, Stat statter) :
+            base(name, dur, statbuffer,statter) { }
+      
+        public override void effect(Character target)
+        {
+            foreach (Stat s in target.Statlist)
+                if (s == Statter)
+                    s.ChangeAmount(-Statbuffer); 
+        }
+    }
 
-      public HEAL(string name, int dur, int heal)
-      : base(name, dur)
-      {
-        Heal = heal;
-      }
-
+    class PositiveBuff : Statbuff
+    {
+        public PositiveBuff(string name, int dur, int heal, int statbuffer, Stat statter)
+            : base(name, dur, statbuffer,statter) { }
+      
       public override void effect(Character target)
       {
-        target.Health = target.Health + Heal;
+          foreach (Stat s in target.Statlist)
+              if (s == Statter)
+                  s.ChangeAmount(Statbuffer); 
       }
     }
-/*
-    class Healing : MyBuff
-    {
-        int Heal { get; set; }
-
-        public Healing(int heal)
-        {
-            this.Heal = heal; 
-        }
-
-        public override void effect(Character target)
-        {
-            target.Health =- Heal; 
-        }
-    }
-
+    /*
     class StatusEffectBuff : MyBuff
     {
         public override void effect(Character target)
@@ -88,5 +79,6 @@ namespace Random_RPG_2013
             target.IsStunned = true; 
         }
     }
- * */
+     * */
+
 }

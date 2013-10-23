@@ -25,7 +25,7 @@ namespace Random_RPG_2013
     public Character CombatStart()
     {
       int turnCounter = 1;
-      DMGPhase(Hero, Creature, 2); // SÆTTER BUFF PÅ CREATURE LOL 
+      
       
       //Keeps combat going while both hero and creature is above 0 health.
       while (Hero.Health > 0 && Creature.Health > 0)

@@ -13,8 +13,8 @@ namespace Random_RPG_2013
 
     Inventory inventory;
 
-    public bool IsStunned = false; 
-    public Dictionary<string, int> Stats; 
+    public bool IsStunned = false;
+    public List<Stat> Statlist; 
     public string Name { get; set; }
     public int Health { get; set; }
 

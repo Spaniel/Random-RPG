@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Random_RPG_2013
-{
+{ /*
   class PositiveBuff : Buff
   {
     public int Effect { get; set; }
@@ -16,4 +16,5 @@ namespace Random_RPG_2013
       Effect = effect;
     }
   }
+   */
 }
