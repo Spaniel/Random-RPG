@@ -7,7 +7,6 @@ using System.Collections;
 
 namespace Random_RPG_2013
 {
-
     class Inventory  : IEnumerable<Item>
     {
         private List<Item> inventory = new List<Item>(); 
@@ -26,7 +25,6 @@ namespace Random_RPG_2013
             }
             else 
                 inventory.Add(item); 
-
         }
 
         public void Remove(Item item, bool sold)
@@ -55,7 +53,5 @@ namespace Random_RPG_2013
         {
             return GetEnumerator(); 
         }
-
-
     }
 }

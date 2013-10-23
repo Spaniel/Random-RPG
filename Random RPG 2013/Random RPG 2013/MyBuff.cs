@@ -31,7 +31,6 @@ namespace Random_RPG_2013
             Name = name;
             _startDuration = dur;
             CurrentDuration = dur; 
-            
         }
     }
 
@@ -47,8 +46,24 @@ namespace Random_RPG_2013
 
         public override void effect(Character target)
         {
-            target.Health = target.Health- Damage; 
+            target.Health = target.Health - Damage; 
         }
+    }
+
+    class HEAL : MyBuff
+    {
+      public int Heal { get; set; }
+
+      public HEAL(string name, int dur, int heal)
+      : base(name, dur)
+      {
+        Heal = heal;
+      }
+
+      public override void effect(Character target)
+      {
+        target.Health = target.Health + Heal;
+      }
     }
 /*
     class Healing : MyBuff

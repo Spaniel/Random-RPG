@@ -178,14 +178,14 @@ namespace Random_RPG_2013
     private void EffectAndDuration(List<MyBuff> BuffList, Character target)
     {
         int k = target.Health; 
+
         for (int i = 0; i < BuffList.Count; i++)
         {
             BuffList[i].effect(target);
-            if (BuffList[i].duration() == 1)
+         
+          if (BuffList[i].duration() == 1)
                 BuffList.Remove(BuffList[i]);
-            
         }
-        
     }
 
     private void Spellcast(Skill spell, Character source, Character enemy)
@@ -221,8 +221,8 @@ namespace Random_RPG_2013
 
     public void DMGPhase(Character source, Character target, int skillIndex)
     {
-        if(source.IsStunned)
-            //nothing 
+      if (source.IsStunned)
+        Utility.DoNothing(); 
 
         if (source.CharacterListOfBuffs.Count() > 0 || target.CharacterListOfBuffs.Count() > 0)
             BuffHandler();

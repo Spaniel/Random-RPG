@@ -81,5 +81,7 @@ namespace Random_RPG_2013
       Interface.HealthBarController("Hero", 100, targetHealth);
       Interface.HealthBarController("Creature", 50, Combat.Creature.Health);
     }
+
+    public static void DoNothing() { }
   }
 }

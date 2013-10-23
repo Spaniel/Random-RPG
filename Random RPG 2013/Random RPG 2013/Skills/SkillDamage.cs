@@ -15,6 +15,7 @@ namespace Random_RPG_2013
     {
         target.Health -= MaxDamage; 
     }
+
     public SkillDamage(string name, string description, int minDamage, int maxDamage)
       : base(name, description)
     {
