@@ -11,11 +11,13 @@ namespace Random_RPG_2013
         public string Name { get; set; }
         public string Description { get; set; }
         private int _startDuration; 
-        private int CurrentDuration { get; set; }
+        internal int CurrentDuration { get; set; }
 
-        public int duration()
-        { 
-            return CurrentDuration--; 
+        public virtual void duration(ref Character target)
+        {
+            CurrentDuration--;
+            
+
         }
 
         public void ResestDuration()
@@ -23,7 +25,7 @@ namespace Random_RPG_2013
             CurrentDuration = _startDuration;
         }
 
-        public virtual void effect(Character target){}
+        public virtual void effect(ref Character target){}
 
         public MyBuff(string name, int dur)
         {
@@ -35,30 +37,51 @@ namespace Random_RPG_2013
 
     class Statbuff : MyBuff
     {
-       internal int Statbuffer { get; set; }
-       internal Stat Statter; 
+       internal int Amount { get; set; }
+       internal StatType _type { get; set; } 
+       internal bool EffectOn = false; 
 
-        public Statbuff(string name, int dur, int statbuffer, Stat statter)
+        public Statbuff(string name, int dur, int statbuffer, StatType type)
             : base(name, dur)
         {
-            Statbuffer = statbuffer;
-            Statter = statter; 
+            Amount = statbuffer;
+            _type = type; 
         }
+
+        
     }
 
     class NegativeBuff : Statbuff
     {
-        public NegativeBuff(string name, int dur, int damage, int statbuffer, Stat statter) :
-            base(name, dur, statbuffer,statter) { }
+        public NegativeBuff(string name, int dur, int statbuffer, StatType type) :
+            base(name, dur, statbuffer,type) { }
       
-        public override void effect(Character target)
+        public override void effect( ref Character target)
         {
-            foreach (Stat s in target.Statlist)
-                if (s == Statter)
-                    s.ChangeAmount(-Statbuffer); 
+            if(!EffectOn)
+            {
+                target.EditStat(_type, -Amount);  
+             EffectOn = true; 
+            }
+            duration(ref target); 
         }
-    }
 
+        public override void duration(ref Character target)
+        {
+            base.duration(ref target);
+            if (CurrentDuration == -1)
+            {
+                target.CharacterListOfBuffs.Remove(this);
+                if (_type != StatType.Health)
+                    target.EditStat(_type, Amount); 
+                        
+                        
+            }
+        }
+
+        
+    }
+    /*
     class PositiveBuff : Statbuff
     {
         public PositiveBuff(string name, int dur, int heal, int statbuffer, Stat statter)
@@ -68,7 +91,8 @@ namespace Random_RPG_2013
       {
           foreach (Stat s in target.Statlist)
               if (s == Statter)
-                  s.ChangeAmount(Statbuffer); 
+                  s.ChangeAmount(Amount);
+          EffectOn = true; 
       }
     }
     /*

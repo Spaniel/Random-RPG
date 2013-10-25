@@ -42,7 +42,8 @@ namespace Random_RPG_2013
         
 		/// I have removed the "switch (userInput)" and instead using the metode "(Skills)" from Navigation
 		//int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count()); 
-        BuffHandler(); // HANDLER BUFF....ALT KOMMER TIL I SKE I DMGPHASE MEN BLIVER NØD TIL AT GØRE DET PÅ DENNE MÅDE FOR AT VISE AT BUFF VIKER
+
+        DMGPhase(Hero, Creature, 0);
         Console.WriteLine(Creature.Health);
         Console.ReadLine(); 
         
@@ -171,20 +172,15 @@ namespace Random_RPG_2013
 
     private void BuffHandler()
     {
-        EffectAndDuration(Hero.CharacterListOfBuffs, Hero);
-        EffectAndDuration(Creature.CharacterListOfBuffs, Creature); 
+        EffectAndDuration(Hero);
+        EffectAndDuration(Creature); 
     }
 
-    private void EffectAndDuration(List<MyBuff> BuffList, Character target)
-    {
-        int k = target.Health; 
-
-        for (int i = 0; i < BuffList.Count; i++)
+    private void EffectAndDuration(Character target)
+    {       
+        for (int i = 0; i < target.CharacterListOfBuffs.Count; i++)
         {
-            BuffList[i].effect(target);
-         
-          if (BuffList[i].duration() == 1)
-                BuffList.Remove(BuffList[i]);
+            target.CharacterListOfBuffs[i].effect(ref target);
         }
     }
 
@@ -201,12 +197,12 @@ namespace Random_RPG_2013
     {
         if (spell.Selfcast)
         {
-            spell.effect(source);
+            spell.effect(source, enemy);
             source.CharacterListOfBuffs.Add(spell.SkillBuff); 
         }
         else
         {
-            spell.effect(enemy);
+            spell.effect(enemy,source);
             enemy.CharacterListOfBuffs.Add(spell.SkillBuff); 
         }
     }
@@ -214,9 +210,9 @@ namespace Random_RPG_2013
     private void Spellwithoutbuff(Skill spell, Character source, Character enemy)
     {
         if (spell.Selfcast)
-            spell.effect(source);
+            spell.effect(source, enemy);
         else
-            spell.effect(enemy); 
+            spell.effect(enemy, source); 
     }
 
     public void DMGPhase(Character source, Character target, int skillIndex)
@@ -226,12 +222,11 @@ namespace Random_RPG_2013
 
         if (source.CharacterListOfBuffs.Count() > 0 || target.CharacterListOfBuffs.Count() > 0)
             BuffHandler();
-
+/*
         if (source.CharacterListOfSkills[skillIndex] is SkillDamage)
               DoDamageSkill(source, target, skillIndex);
-       
-        else 
-            Spellcast(source.CharacterListOfSkills[skillIndex], source,target); 
+       */
+        Spellcast(source.CharacterListOfSkills[skillIndex], source,target); 
 
         // der skal så være noget her med abillities 
         

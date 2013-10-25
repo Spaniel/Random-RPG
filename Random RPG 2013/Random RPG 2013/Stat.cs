@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Random_RPG_2013
 {
-    class Stat: System.Object
+    public enum StatType { Health,Attack, Dex }; 
+    class Stat
     {
-        string Name { get; set; }
-        int Amount { get; set; }
+        public StatType Kind; 
+        public  int Amount { get; set; }
 
-        public Stat(string name, int amount)
+     
+
+        public Stat(int amount, StatType type)
         {
-            Name = name;
+            Kind = type; 
             Amount = amount; 
         }
 
@@ -22,21 +25,6 @@ namespace Random_RPG_2013
             Amount += change; 
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-
-            Stat i = obj as Stat;
-            if ((System.Object)i == null)
-                return false;
-
-            return Name == i.Name; 
-        }
-
-        public override int GetHashCode()
-        {
-          return Name.GetHashCode(); 
-        }
+        
     }
 }

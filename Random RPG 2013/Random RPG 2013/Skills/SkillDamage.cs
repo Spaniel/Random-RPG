@@ -11,9 +11,9 @@ namespace Random_RPG_2013
     public int MinDamage { get; set; }
     public int MaxDamage { get; set; }
 
-    public override void effect(Character target)
+    public override void effect(Character target, Character source)
     {
-        target.Health -= MaxDamage; 
+        target.Health -= MaxDamage + source.GetAttack(); 
     }
 
     public SkillDamage(string name, string description, int minDamage, int maxDamage)

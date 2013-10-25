@@ -14,7 +14,7 @@ namespace Random_RPG_2013
     public bool Selfcast = false; 
     public bool HasBuff; 
 
-    public virtual void effect(Character target) { }
+    public virtual void effect(Character target, Character source) { }
 
     public Skill(string name, string description)
     {

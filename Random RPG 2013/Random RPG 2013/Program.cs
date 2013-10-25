@@ -18,7 +18,13 @@ namespace Random_RPG_2013
 
       Hero spanieL = new Hero("spanieL", 100, 6, 5, 5, 5, 5);
       Creature Rat = new Creature("Rat", 50, 10);
-        
+
+      NegativeBuff nega = new NegativeBuff("LOL", 3, 20, StatType.Attack);
+      SkillWithBuff AttackReduc = new SkillWithBuff("whatever", "hej", nega);
+      
+      spanieL.CharacterListOfBuffs.Add(nega); 
+
+     
         /*
       #region haX'd
       /// Hardcodet atm, shouldn't be, also need to specify hero and creature through classes and not string if possible
