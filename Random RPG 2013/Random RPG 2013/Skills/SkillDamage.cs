@@ -13,7 +13,7 @@ namespace Random_RPG_2013
 
     public override void effect(Character target, Character source)
     {
-        target.Health -= MaxDamage + source.GetAttack(); 
+        target.EditStat(StatType.Health, -MaxDamage - source.GetStat(StatType.Attack)); 
     }
 
     public SkillDamage(string name, string description, int minDamage, int maxDamage)

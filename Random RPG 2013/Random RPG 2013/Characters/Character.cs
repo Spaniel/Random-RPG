@@ -3,50 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections; 
 
 namespace Random_RPG_2013
 {
+    public enum StatType { Health, Attack, Dex }; 
   abstract class Character
   {
     public List<Skill> CharacterListOfSkills = new List<Skill>();
     public List<MyBuff> CharacterListOfBuffs = new List<MyBuff>();
 
     Inventory inventory;
-
-      
-
     public bool IsStunned = false;
-    
-    public List<Stat> Statlist = new List<Stat>()
-    {
-       new Stat(100, StatType.Health), 
-       new Stat(28, StatType.Attack)
-    }; 
     public string Name { get; set; }
     public int Health { get; set; }
 
-    public void EditStat(StatType statType, int amount)
-    {
-        foreach (Stat s in Statlist)
+    private Dictionary<StatType, int> Stats = new Dictionary<StatType, int>
         {
-            if (s.Kind == statType)
-                s.Amount += amount;  
-        }
+            {StatType.Health, 100 }, 
+            {StatType.Attack,28}
+        };
+
+    #region StatManipulation
+    public void EditStat(StatType stat, int amount)
+    {
+        List<KeyValuePair<StatType, int>> list = new List<KeyValuePair<StatType, int>>(Stats);
+
+        foreach (KeyValuePair<StatType, int> kvp in list)
+        {
+            if (stat == kvp.Key)
+                Stats[kvp.Key] += amount; 
+        }        
     }
 
-    public int  GetAttack()
+    public int  GetStat(StatType stat)
     {
-        int k = 0 ;
-        foreach (Stat s in Statlist)
+        int k = 0; 
+        List<KeyValuePair<StatType, int>> list = new List<KeyValuePair<StatType, int>>(Stats);
+
+        foreach (KeyValuePair<StatType, int> kvp in list)
         {
-            if (s.Kind == StatType.Attack)
-               k  = s.Amount; 
-
+            if (stat == kvp.Key)
+                k = kvp.Value; 
         }
-        
-        return k; 
+        return k;       
     }
-
+    #endregion
     public Character(string name, int health, int damage)
     {
       Name = name;

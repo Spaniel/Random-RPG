@@ -22,8 +22,9 @@ namespace Random_RPG_2013
       NegativeBuff nega = new NegativeBuff("LOL", 3, 20, StatType.Attack);
       SkillWithBuff AttackReduc = new SkillWithBuff("whatever", "hej", nega);
       
-      spanieL.CharacterListOfBuffs.Add(nega); 
+      spanieL.CharacterListOfBuffs.Add(nega);
 
+      Rat.CharacterListOfBuffs.Add(new NegativeBuff("hejsa", 3, 10, StatType.Health)); 
      
         /*
       #region haX'd
