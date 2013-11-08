@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace Random_RPG_2013
 {
-  class Skill
-  {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    //public int Cost { get; set; }
-    public bool Selfcast = false; 
-    public bool HasBuff;
-    
-
-    public virtual void effect(Character target, Character source) { }
-
-
-
-    public Skill(string name, string description)
+     abstract class Skill
     {
-      Name = name;
-      Description = description;
-      //Cost = cost;
+        public string Name { get; set; }
+        public string Description { get; set; }
+        //public int Cost { get; set; }
+        public virtual void DoEffect(Character target, Character source) { }
+        public abstract bool CheckSkill(); 
+
+        
+        public Skill(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
+         
     }
-  }
+ 
 }

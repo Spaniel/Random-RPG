@@ -11,9 +11,7 @@ namespace Random_RPG_2013
 
     public static Hero Hero { get; set; }
     public static Creature Creature { get; set; }
-     
-    private List<MyBuff> HeroBuffs;
-    private List<MyBuff> CreatureBuffs; 
+    bool CHECKER = false; // SKAL KUN BRUGES TIL TEST AF SKILLS 
 
     public Combat(Hero hero, Creature creature)
     {
@@ -41,10 +39,14 @@ namespace Random_RPG_2013
         
 		/// I have removed the "switch (userInput)" and instead using the metode "(Skills)" from Navigation
 		//int userInput = Utility.ValidateUserInput(Hero.CharacterListOfSkills.Count()); 
-
-       // DMGPhase(Hero, Creature, 0);
+        if (!CHECKER)
+        {
+            DMGPhase(Hero, Creature, 3);
+            CHECKER = false; 
+        }
         BuffHandler(); 
         Console.WriteLine(Creature.GetStat(StatType.Health));
+        Console.WriteLine(Hero.GetStat(StatType.Health)); 
         Console.ReadLine(); 
     }
 
@@ -57,42 +59,30 @@ namespace Random_RPG_2013
     }
 
     private void EffectAndDuration(Character target)
-    {       
+    {
+        MyBuff b = null; 
         for (int i = 0; i < target.CharacterListOfBuffs.Count; i++)
         {
-            target.CharacterListOfBuffs[i].effect(ref target);
+            b = target.CharacterListOfBuffs[i];
+            b.effect(target);
+            PrintBuffStuff(b, target); 
+
         }
     }
 
-    private void Spellcast(Skill spell, Character source, Character enemy)
+    public void SpellCast(Character caster, Character enemy, int skillindex)
     {
-        if (spell is SkillWithBuff)
-            SpellEffectWithBuff((SkillWithBuff)spell, source, enemy);
-        else
-            Spellwithoutbuff(spell, source, enemy); 
+        int CasterHealthBefore = caster.GetStat(StatType.Health);
+        int EnemyHealthBefore = enemy.GetStat(StatType.Health); 
+       Skill s = caster.CharacterListOfSkills[skillindex]; 
+       s.DoEffect(enemy,caster);
 
-    }
-
-    private void SpellEffectWithBuff(SkillWithBuff spell, Character source, Character enemy)
-    {
-        if (spell.Selfcast)
-        {
-            spell.effect(source, enemy);
-            source.CharacterListOfBuffs.Add(spell.SkillBuff); 
-        }
-        else
-        {
-            spell.effect(enemy,source);
-            enemy.CharacterListOfBuffs.Add(spell.SkillBuff); 
-        }
-    }
-
-    private void Spellwithoutbuff(Skill spell, Character source, Character enemy)
-    {
-        if (spell.Selfcast)
-            spell.effect(source, enemy);
-        else
-            spell.effect(enemy, source); 
+       if (s.CheckSkill())
+       {
+           printstuff(s, caster.GetStat(StatType.Health), CasterHealthBefore , caster.Name);
+           printstuff(s, enemy.GetStat(StatType.Health), EnemyHealthBefore, enemy.Name); 
+       }
+             
     }
 
     public void DMGPhase(Character source, Character target, int skillIndex)
@@ -102,11 +92,42 @@ namespace Random_RPG_2013
 
         if (source.CharacterListOfBuffs.Count() > 0 || target.CharacterListOfBuffs.Count() > 0)
             BuffHandler();
-       
-        Spellcast(source.CharacterListOfSkills[skillIndex], source,target); 
+
+        SpellCast(source, target, skillIndex); 
+        
       
     }
     #endregion
-       
+
+      #region Printing stuff 
+    private void printstuff(Skill skill, int current, int previous, string name)
+    {
+        if (current < previous)
+        {
+            int HealthLost = previous - current;
+            Console.WriteLine(skill.Name + " did " + HealthLost + " damage to " + name);
+            
+        }
+        else if(current > previous)
+        {
+            int HealthGained = current - previous; 
+            Console.WriteLine(name + " gained " + HealthGained + " Health");
+            
+        }
+
+    }
+
+      private void PrintBuffStuff(MyBuff buff, Character BuffOwner)
+      {
+          Console.WriteLine(BuffOwner.Name + " is affected by " + buff.Name); 
+      }
+        
+            
+        
+
+    }
+      #endregion
+
   }
-}
+
+

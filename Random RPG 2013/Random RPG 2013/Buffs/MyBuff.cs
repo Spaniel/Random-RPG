@@ -6,7 +6,49 @@ using System.Threading.Tasks;
 
 namespace Random_RPG_2013
 {
-    abstract class MyBuff : IEquatable<MyBuff>
+    interface IEffect 
+    { 
+        void effect(Character target, Character source);
+        void effect(Character source);           
+    }
+
+    abstract class OneTime : IEffect
+    {
+        internal StatType stat; 
+        public virtual void effect(Character target, Character source) {}
+        public virtual void effect(Character target){}
+    }
+
+    class Offense : OneTime
+    {
+        int min_damage { get; set; }
+        int max_damage { get; set; }
+
+        public override void effect(Character target, Character source)
+        {
+            target.EditStat(StatType.Health, -min_damage); 
+        }
+
+        public Offense(StatType type, int min)
+        {
+            min_damage = min;
+            stat = type; 
+        }
+    }
+
+    class Defense : OneTime
+    {
+        int min;
+        int max;
+
+        public override void effect(Character source )
+        {
+            source.Health += min; 
+        }
+    }
+
+    #region BUFFS
+    abstract class MyBuff : IEffect, IEquatable<MyBuff>
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,6 +56,10 @@ namespace Random_RPG_2013
         internal int CurrentDuration { get; set; }
 
         internal virtual void Revert(Character target){}
+
+        public virtual void effect(Character target) { }
+        public virtual void effect(Character source, Character target) { }
+     
 
         internal int duration()
         {
@@ -23,9 +69,7 @@ namespace Random_RPG_2013
         public void ResestDuration()
         {
             CurrentDuration = _startDuration;
-        }
-
-        public virtual void effect(ref Character target){}
+        }      
 
         public MyBuff(string name, int dur)
         {
@@ -83,31 +127,28 @@ namespace Random_RPG_2013
 #endregion
     }
 
-    abstract class Statbuff : MyBuff
+    public enum PositiveOrNegative { Positive, Negative }
+    class Statbuff : MyBuff
     {
        internal int Amount { get; set; }
        internal StatType _type { get; set; } 
-       internal bool EffectOn = false; 
+       internal bool EffectOn = false;
+        
 
         public Statbuff(string name, int dur, int statbuffer, StatType type)
             : base(name, dur)
         {
             Amount = statbuffer;
-            _type = type; 
+            _type = type;
+            
         }
-    }
 
-    class NegativeBuff : Statbuff
-    {
-        public NegativeBuff(string name, int dur, int statbuffer, StatType type) :
-            base(name, dur, statbuffer,type) { }
-
-        public override void effect(ref Character target)
-        {
+        public override void effect(Character target)
+        {          
             if (!EffectOn)
             {
-                target.EditStat(_type, -Amount);
-                if(_type != StatType.Health)
+                target.EditStat(_type, Amount);
+                if (_type != StatType.Health)
                     EffectOn = true;
             }
 
@@ -119,42 +160,43 @@ namespace Random_RPG_2013
         {
             target.CharacterListOfBuffs.Remove(this);
             if (_type != StatType.Health)
-                target.EditStat(_type, Amount); 
+                target.EditStat(_type, Amount);
 
         }        
-    }
-    
-    class PositiveBuff : Statbuff
-    {
-        public PositiveBuff(string name, int dur, int statbuffer, StatType type)
-            : base(name, dur, statbuffer,type) { }
-      
-      public override void effect( ref Character target)
-      {
-          if (!EffectOn)
-          {
-              target.EditStat(_type, Amount);
-              if (_type != StatType.Health) 
-                EffectOn = true;
-          }
-          if (duration() == 1)
-              Revert(target); 
-      }
 
-      internal override void Revert(Character target)
-      {
-          target.CharacterListOfBuffs.Remove(this);
-          if (_type != StatType.Health)
-              target.EditStat(_type, -Amount); 
-      }
-   }
+
+    }
+    class PercentageBuff : Statbuff
+    {
+        double Percentage { get; set; }
+        public PercentageBuff(string name, int dur, StatType type, double percentage)
+            : base(name, dur, 0, type)
+        {
+            this.Percentage = percentage; 
+        }
+
+        private int CalcPercent(Character target)
+        {
+            int Originalstat = target.GetStat(_type);
+            double k = Originalstat * (Percentage / 100); 
+            return (int)k; 
+        }
+
+        public override void effect(Character source, Character target)
+        {
+            Amount = CalcPercent(target); 
+            base.effect(source, target);
+        }
+    }
+
+
 
     class StatusEffect : MyBuff
     {
         public StatusEffect(string name, int dur)
             : base(name, dur) { }
 
-        public override void effect(ref Character target)
+        public override void effect( Character target)
         {
             target.IsStunned = true;
             if (duration() == 0)
@@ -168,7 +210,7 @@ namespace Random_RPG_2013
             target.IsStunned = false; 
         } 
     }
-   
+#endregion 
 }
 
     
