@@ -19,7 +19,30 @@ namespace Random_RPG_2013
           Hero spanieL = new Hero("spanieL", 100, 6, 5, 5, 5, 5);
           Creature Rat = new Creature("Rat", 50, 10);
 
+          Zone rainbowROAD = new Zone("Rainbow", 100, 100); 
+          
+          int[] pos = new int[4];
 
+          pos[0] = 100; 
+          pos[1] = 0; 
+          pos[2] = 50; 
+          pos[3] = 50;
+
+          List<Merchant> hej = new List<Merchant>();
+          hej.Add(new Merchant("HATER")); 
+          Town Aalborg = new Town("Aalbor", hej); 
+
+          int[] Postion = new int[4]; 
+          Postion[0] = 99; 
+          Postion[1] = 1; 
+          Postion[2] = 50; 
+          Postion[3] = 50; 
+
+          rainbowROAD.Towns.Add(Aalborg, Postion); 
+
+          Movement walkwalk = new Movement(pos, rainbowROAD);
+
+          walkwalk.Walking(); 
 
 
           Statbuff Burn = new Statbuff("BURN", 3, -5, StatType.Health); // hvis det er DOT er det minus den skade der skal gøres

@@ -8,9 +8,26 @@ namespace Random_RPG_2013
 {
   class NPC
   {
-   /* public NPC(string name)
-      : base(name) { }*/
+      public string Name { get; set; }
+      List<string> Messages { get; set; }
 
-      string Message { get; set; }
+      public NPC(string name)
+      {
+          this.Name = name; 
+      }
+
+  }
+
+  class Merchant : NPC
+  {
+      int Money { get; set; }
+      List<Item> item { get; set; }
+
+      public Merchant(string name)
+          : base(name) { }
+      
+      
+      
+
   }
 }
